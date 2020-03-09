@@ -172,9 +172,11 @@ public class BlueScanner implements BleManager.BleManagerListener{
     @Override
     public void onServicesDiscovered() {
         DebugText.getInstance().write(">>> Service Discovered");
+        DebugText.getInstance().write(">>> Connected");
         this.uartService.onServicesDiscovered();
         this.connected = true;
-        this.textConnection.setText("Connected");
+        if(this.textConnection != null)
+            this.textConnection.setText("Connected");
     }
 
     @Override

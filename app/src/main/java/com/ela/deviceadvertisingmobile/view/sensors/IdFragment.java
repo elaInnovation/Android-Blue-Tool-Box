@@ -115,6 +115,7 @@ public class IdFragment extends Fragment
                     connectDisplay = false;
                     layoutConnection.setVisibility(View.VISIBLE);
                     BlueScanner.getInstance().disconnect();
+                    tagStateConnection.setText("Disconnect");
                 }
                 else
                 {

@@ -1,6 +1,7 @@
 package com.ela.deviceadvertisingmobile.view;
 
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 public class DebugText
@@ -20,6 +21,7 @@ public class DebugText
     {
         this.context = context;
         this.textView = textView;
+        this.textView.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
     public void write(String data)

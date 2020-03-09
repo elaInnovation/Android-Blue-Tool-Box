@@ -71,7 +71,7 @@ public class UartService implements BleManager.BleManagerListener {
                     mBleManager.writeService(mUartService, UUID_TX, chunk);
                 } catch (Exception e)
                 {
-                    System.out.println(e.getLocalizedMessage());
+                    System.out.println(e);
                 }
 
             }
@@ -173,8 +173,18 @@ public class UartService implements BleManager.BleManagerListener {
      */
     public byte[] readRxMessage()
     {
-        while(mUartService.getCharacteristics().get(1).getValue() == null);
-        return mUartService.getCharacteristics().get(1).getValue();
+        try {
+            Thread.sleep(1000);
+            if(mUartService == null)
+                return null;
+            else
+                return mUartService.getCharacteristics().get(1).getValue();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
     }
 
     /**********************************************************************************************/

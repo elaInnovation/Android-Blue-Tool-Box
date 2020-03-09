@@ -96,6 +96,23 @@ public class DebugFragment extends Fragment
     }
 
     /**
+     *   Convert hex character to ascii string
+     * @param hexStr [String]
+     * @return
+     */
+    private String hexToAscii(String hexStr) {
+        if(hexStr == null) { return "Bad response";}
+        StringBuilder output = new StringBuilder("");
+
+        for (int i = 0; i < hexStr.length(); i += 3)
+        {
+            String str = hexStr.substring(i, i + 2);
+            output.append((char) Integer.parseInt(str, 16));
+        }
+        return output.toString();
+    }
+
+    /**
      *   Map the widgets
      * @param v [View]
      */
@@ -109,6 +126,9 @@ public class DebugFragment extends Fragment
                 if(!txtCmd.getText().toString().equals("")) {
                     DebugText.getInstance().write(">>> Try to send the command : " + txtCmd.getText().toString());
                     BlueScanner.getInstance().sendData(txtCmd.getText().toString());
+
+                    DebugText.getInstance().write(">>> Response : ");
+                    DebugText.getInstance().write(hexToAscii(BlueScanner.getInstance().readRx()));
                 }
             }
         });
