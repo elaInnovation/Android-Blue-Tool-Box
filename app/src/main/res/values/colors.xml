@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!-- additionnal colors -->
+    <color name="elaBlueColor">#336699</color>
+    <color name="elaWhiteColor">#ffffff</color>
+    <!-- charte v2 -->
+    <color name="elaLightBlueColor">#486a8f</color>
+    <color name="elaDarkBlueColor">#2d5080</color>
+    <color name="elaLightGrayColor">#cccccc</color>
+    <color name="elaDarkGrayColor">#494949</color>
+    <color name="elaRedColor">#b63e41</color>
+    <color name="elaBlack">#000</color>
+
+    <color name="background">#FAFAFA </color>
+    <color name="elaLightBlueColorCircle">#40486a8f</color>
+</resources>

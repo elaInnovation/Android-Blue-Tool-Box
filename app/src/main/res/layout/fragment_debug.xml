@@ -1,0 +1,218 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.ela.deviceadvertisingmobile.view.sensors.TemperatureFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/elaDarkBlueColor"
+            android:textSize="32sp"
+            android:text="Debug" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="80dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/start_scan"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:src="@drawable/start"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Start"
+                    android:textAlignment="center"
+                    android:textColor="@color/elaDarkBlueColor" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="80dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/stop_scan"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:src="@drawable/stop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Stop"
+                    android:textAlignment="center"
+                    android:textColor="@color/elaDarkBlueColor" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <!-- Tag Tablelayout -->
+            <ScrollView
+                android:id="@+id/scroll_tag_table"
+                android:layout_height="120dp"
+                android:layout_width="fill_parent">
+
+                <TableLayout
+                    android:id="@+id/table_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:stretchColumns="0,1">
+                </TableLayout>
+             </ScrollView>
+
+            <!-- Scroll vie for first box and second box -->
+            <ScrollView
+                android:id="@+id/detail_scroll"
+                android:layout_width="match_parent"
+                android:paddingTop="15dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <!-- Second box for connection -->
+                    <LinearLayout
+                        android:id="@+id/connection_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/border"
+                        android:visibility="visible">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/blue_connect"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/tag_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/elaDarkBlueColor"
+                                    android:textSize="32sp"
+                                    android:text="Tag"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:paddingBottom="5dp"
+                                    android:gravity="center|end">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingEnd="10dp"
+                                        android:textColor="@color/elaDarkBlueColor"
+                                        android:textSize="20sp"
+                                        android:text="Connect / Disconnect"/>
+                                    <ImageButton
+                                        android:id="@+id/connect_tag"
+
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:src="@drawable/connection"
+                                        android:background="@null"
+                                        android:scaleType="fitCenter"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/elaDarkBlueColor"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:padding="10dp"
+                            android:background="@color/elaDarkBlueColor"/>
+
+                        <EditText
+                            android:id="@+id/input_command"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:text=""
+                            android:focusable="true"
+                            android:inputType="text"
+                            android:maxLength="40"
+                            android:hint="Write a command..."/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:paddingBottom="10dp"
+                            android:layout_height="wrap_content">
+                            <Button
+                                android:id="@+id/send_command"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_button"
+                                android:text="Send"/>
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:padding="10dp"
+                            android:background="@color/elaDarkBlueColor"/>
+
+                        <TextView
+                            android:id="@+id/output_console"
+                            android:layout_width="match_parent"
+                            android:scrollbars="vertical"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+
+
+                    <View
+                        android:id="@+id/view_end"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
