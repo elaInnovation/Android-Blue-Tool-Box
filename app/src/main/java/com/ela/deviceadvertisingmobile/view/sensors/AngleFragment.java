@@ -22,16 +22,14 @@ import com.ela.deviceadvertisingmobile.ble.BleFactory;
 import com.ela.deviceadvertisingmobile.ble.BlueScanner;
 import com.ela.deviceadvertisingmobile.ble.tag.Tag;
 import com.ela.deviceadvertisingmobile.ble.tag.TagAngle;
-import com.ela.deviceadvertisingmobile.ble.tag.TagMovement;
+
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator;
 
-public class AngleFragment extends Fragment
-{
+public class AngleFragment extends Fragment {
     /** ---------- Arguments ---------- */
     private ImageButton startScan;
     private ImageButton stopScan;
@@ -55,6 +53,8 @@ public class AngleFragment extends Fragment
     private boolean connectDisplay = false;
     private boolean scrollIsUp = true;
 
+
+
     /** ---------- Public functions -------- */
     public AngleFragment() { }
 
@@ -72,6 +72,7 @@ public class AngleFragment extends Fragment
 
         return v;
     }
+
 
     @Override
     public void onDestroy() {
@@ -296,6 +297,7 @@ public class AngleFragment extends Fragment
         }
         return output.toString();
     }
+
 
     /**
      *   Update the Ui

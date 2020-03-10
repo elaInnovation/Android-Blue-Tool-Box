@@ -1,6 +1,7 @@
 package com.ela.deviceadvertisingmobile;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -39,6 +40,7 @@ import com.ela.deviceadvertisingmobile.view.sensors.MovementFragment;
 import com.ela.deviceadvertisingmobile.view.sensors.TemperatureFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -72,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
         mapUi();
         setListener();
         addItemsToNavBar();
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    public void onBackPressed(){
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.getFragments().remove(fragmentManager.getFragments().size() -1 );
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -116,11 +128,22 @@ public class MainActivity extends AppCompatActivity {
         BlueScanner.getInstance().setBtScanner(this,btScanner);
     }
 
+
+
     /**
      *   set the listener
      */
     private void setListener()
     {
+        this.homeLayoutDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+
         // Drawer Item click listeners
         this.mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
