@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingBottom="30dp"
-                android:text="Data Advertising Beacon"
+                android:text="Blue Tool Box"
                 android:textColor="@color/elaRedColor"
                 android:textSize="36sp"
                 android:textStyle="bold" />
