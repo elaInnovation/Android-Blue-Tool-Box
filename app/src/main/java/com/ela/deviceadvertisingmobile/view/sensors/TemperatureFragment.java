@@ -52,7 +52,7 @@ public class TemperatureFragment extends Fragment
     private Runnable updater, updaterDetail;
     private final int UPDATE_TIME_MS = 1000;
     private final int UPDATE_DETAIL_TIME_MS = 500;
-    private final int MIN_Y_VALUE = 0;
+    private final int MIN_Y_VALUE = -20;
     private final int MAX_Y_VALUE = 40;
     private final int MIN_X_VALUE = 0;
     private final int MAX_X_VALUE = 10;

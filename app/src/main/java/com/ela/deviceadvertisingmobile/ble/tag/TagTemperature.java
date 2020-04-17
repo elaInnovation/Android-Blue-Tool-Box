@@ -24,9 +24,19 @@ public class TagTemperature extends Tag
     {
         this.name = rawData.getDevice().getName();
         this.rssi = rawData.getRssi();
-        String temp = advData.substring(MSB_TEMP,MSB_TEMP+2).concat(advData.substring(LSB_TEMP,LSB_TEMP+2));
-        int decimal=Integer.parseInt(temp,16);
-        this.temperature = (double)decimal / 100;
+
+        if(advData.substring(MSB_TEMP,MSB_TEMP+1).equals("f"))
+        {
+            String temp = advData.substring(MSB_TEMP,MSB_TEMP+2).concat(advData.substring(LSB_TEMP,LSB_TEMP+2));
+            short decimal = Integer.valueOf(temp,16).shortValue();
+            this.temperature = (double)decimal / 100;
+        }
+        else
+        {
+            String temp = advData.substring(MSB_TEMP,MSB_TEMP+2).concat(advData.substring(LSB_TEMP,LSB_TEMP+2));
+            int decimal=Integer.parseInt(temp,16);
+            this.temperature = (double)decimal / 100;
+        }
     }
 
     /**
@@ -37,9 +47,18 @@ public class TagTemperature extends Tag
     public void updateData(ScanResult rawData, String advData)
     {
         this.rssi = rawData.getRssi();
-        String temp = advData.substring(MSB_TEMP,MSB_TEMP+2).concat(advData.substring(LSB_TEMP,LSB_TEMP+2));
-        int decimal=Integer.parseInt(temp,16);
-        this.temperature = (double)decimal / 100;
+        if(advData.substring(MSB_TEMP,MSB_TEMP+1).equals("f"))
+        {
+            String temp = advData.substring(MSB_TEMP,MSB_TEMP+2).concat(advData.substring(LSB_TEMP,LSB_TEMP+2));
+            short decimal = Integer.valueOf(temp,16).shortValue();
+            this.temperature = (double)decimal / 100;
+        }
+        else
+        {
+            String temp = advData.substring(MSB_TEMP,MSB_TEMP+2).concat(advData.substring(LSB_TEMP,LSB_TEMP+2));
+            int decimal=Integer.parseInt(temp,16);
+            this.temperature = (double)decimal / 100;
+        }
     }
 
     /**
