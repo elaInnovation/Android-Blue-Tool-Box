@@ -107,7 +107,7 @@ public class BleFactory
                 this.tagList.put(rawData.getDevice().getName(), tag);
                 this.macList.put(rawData.getDevice().getName(), rawData.getDevice().getAddress());
             }
-            else if(isId(data))
+            else if(isId(data) || isBeacon(data) || isEddystone(data))
             {
                 TagId tag = new TagId();
                 tag.setData(rawData, data);
@@ -298,6 +298,34 @@ public class BleFactory
     private boolean isId(String data)
     {
         if(data.substring(ID_CARAC_1,ID_CARAC_1+2).equals(CARAC_ID))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *   Check if the Scan Result is an iBeacon tag
+     * @param data [String] : data in hex as string
+     * @return [boolean]
+     */
+    private boolean isBeacon(String data)
+    {
+        if(data.substring(ID_CARAC_1,ID_CARAC_1+2).equals("ff"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *   Check if the Scan Result is an Eddystone tag
+     * @param data [String] : data in hex as string
+     * @return [boolean]
+     */
+    private boolean isEddystone(String data)
+    {
+        if(data.substring(ID_CARAC_1,ID_CARAC_1+2).equals("03"))
         {
             return true;
         }
