@@ -2,15 +2,15 @@ package com.ela.deviceadvertisingmobile.ble.tag;
 
 import android.bluetooth.le.ScanResult;
 
-public class TagId extends Tag
+public class TagEddystone extends Tag
 {
     /** ---------- Arguments ---------- */
 
-    private final static String TAG = TagId.class.getSimpleName();
-
+    private final static String TAG = TagEddystone.class.getSimpleName();
+    public String Nid, Bid;
 
     /** ---------- Public functions -------- */
-    public TagId() { }
+    public TagEddystone() { }
 
     /**
      *   Set the data in the object
@@ -19,6 +19,10 @@ public class TagId extends Tag
      */
     public void setData(ScanResult rawData, String advData)
     {
+        this.Nid = advData.substring(39,68);
+        this.Nid = this.Nid.toUpperCase().replaceAll("\\s+","");
+        this.Bid = advData.substring(69,86);
+        this.Bid = this.Bid.toUpperCase().replaceAll("\\s+","");
         this.name = rawData.getDevice().getName();
         this.rssi = rawData.getRssi();
     }

@@ -21,6 +21,8 @@ import com.ela.deviceadvertisingmobile.R;
 import com.ela.deviceadvertisingmobile.ble.BleFactory;
 import com.ela.deviceadvertisingmobile.ble.BlueScanner;
 import com.ela.deviceadvertisingmobile.ble.tag.Tag;
+import com.ela.deviceadvertisingmobile.ble.tag.TagBeacon;
+import com.ela.deviceadvertisingmobile.ble.tag.TagEddystone;
 import com.ela.deviceadvertisingmobile.ble.tag.TagId;
 import com.ela.deviceadvertisingmobile.ble.tag.TagTemperature;
 import com.jjoe64.graphview.GraphView;
@@ -43,6 +45,8 @@ public class IdFragment extends Fragment
     private TextView tagName, tagStateConnection, tagBatValue;
     private LinearLayout layoutConnection;
     private ImageButton sendLedOn, sendLedOff, sendBuzzOn, sendBuzzOff, sendBatt;
+    private LinearLayout layoutBeaconEddys;
+    private TextView uuidNid, majorBid, minor;
 
     private final Handler timerHandler = new Handler();
     private final Handler timerHandlerDetail = new Handler();
@@ -188,6 +192,11 @@ public class IdFragment extends Fragment
 
             }
         });
+
+        this.layoutBeaconEddys = v.findViewById(R.id.beacon_eddys_layout);
+        this.uuidNid = v.findViewById(R.id.uuid_nid_text);
+        this.majorBid = v.findViewById(R.id.major_bid_text);
+        this.minor = v.findViewById(R.id.minor_text);
     }
 
 
@@ -233,7 +242,9 @@ public class IdFragment extends Fragment
         int i = 0;
         for(Map.Entry<String, Tag> entry : tagList.entrySet())
         {
-            if(entry.getValue() instanceof TagId) {
+            if(entry.getValue() instanceof TagId
+            || entry.getValue() instanceof TagBeacon
+            || entry.getValue() instanceof TagEddystone) {
                 if (!this.currentList.containsKey(entry.getKey())) {
                     newTableRow(entry.getKey(), macList.get(entry.getKey()), entry.getValue().getRssi());
                 } else {
@@ -335,10 +346,30 @@ public class IdFragment extends Fragment
 
         for(Map.Entry<String, Tag> entry : tagList.entrySet())
         {
-            if(entry.getKey().equals(this.tagSelectedName) &&
-                    (entry.getValue() instanceof TagId))
+            if(entry.getKey().equals(this.tagSelectedName))
             {
-                this.tagName.setText(entry.getKey());
+                if(entry.getValue() instanceof TagId)
+                {
+                    this.layoutBeaconEddys.setVisibility(View.GONE);
+                    this.tagName.setText(entry.getKey());
+                }
+                else if(entry.getValue() instanceof TagBeacon)
+                {
+                    this.layoutBeaconEddys.setVisibility(View.VISIBLE);
+                    this.tagName.setText(entry.getKey());
+                    this.uuidNid.setText("UUID : "+ ((TagBeacon) entry.getValue()).Uuid);
+                    this.majorBid.setText("Major : "+((TagBeacon) entry.getValue()).Major);
+                    this.minor.setVisibility(View.VISIBLE);
+                    this.minor.setText("Minor : "+((TagBeacon) entry.getValue()).Minor);
+                }
+                else if(entry.getValue() instanceof TagEddystone)
+                {
+                    this.layoutBeaconEddys.setVisibility(View.VISIBLE);
+                    this.tagName.setText(entry.getKey());
+                    this.uuidNid.setText("NID : "+ ((TagEddystone) entry.getValue()).Nid);
+                    this.majorBid.setText("BID : "+((TagEddystone) entry.getValue()).Bid);
+                    this.minor.setVisibility(View.GONE);
+                }
             }
         }
     }

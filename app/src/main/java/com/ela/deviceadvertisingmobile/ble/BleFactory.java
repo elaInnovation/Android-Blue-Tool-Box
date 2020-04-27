@@ -4,6 +4,8 @@ import android.bluetooth.le.ScanResult;
 
 import com.ela.deviceadvertisingmobile.ble.tag.Tag;
 import com.ela.deviceadvertisingmobile.ble.tag.TagAngle;
+import com.ela.deviceadvertisingmobile.ble.tag.TagBeacon;
+import com.ela.deviceadvertisingmobile.ble.tag.TagEddystone;
 import com.ela.deviceadvertisingmobile.ble.tag.TagId;
 import com.ela.deviceadvertisingmobile.ble.tag.TagMagnetic;
 import com.ela.deviceadvertisingmobile.ble.tag.TagMovement;
@@ -75,6 +77,7 @@ public class BleFactory
     public void setTag(ScanResult rawData)
     {
         if(rawData.getScanRecord() == null) { return; }
+        if(rawData.getDevice().getName() == null) {return;}
 
         String data = bytesToHex(rawData.getScanRecord().getBytes());
 
@@ -107,9 +110,27 @@ public class BleFactory
                 this.tagList.put(rawData.getDevice().getName(), tag);
                 this.macList.put(rawData.getDevice().getName(), rawData.getDevice().getAddress());
             }
-            else if(isId(data) || isBeacon(data) || isEddystone(data))
+            else if(isId(data))
             {
                 TagId tag = new TagId();
+                tag.setData(rawData, data);
+                if(tag.getName() == null) { return; }
+                this.currentTag = tag;
+                this.tagList.put(rawData.getDevice().getName(), tag);
+                this.macList.put(rawData.getDevice().getName(), rawData.getDevice().getAddress());
+            }
+            else if(isBeacon(data))
+            {
+                TagBeacon tag = new TagBeacon();
+                tag.setData(rawData, data);
+                if(tag.getName() == null) { return; }
+                this.currentTag = tag;
+                this.tagList.put(rawData.getDevice().getName(), tag);
+                this.macList.put(rawData.getDevice().getName(), rawData.getDevice().getAddress());
+            }
+            else if(isEddystone(data))
+            {
+                TagEddystone tag = new TagEddystone();
                 tag.setData(rawData, data);
                 if(tag.getName() == null) { return; }
                 this.currentTag = tag;
@@ -184,6 +205,9 @@ public class BleFactory
      */
     private void updateList(Tag tag, ScanResult rawData, String data)
     {
+        if (rawData.getDevice().getName() == null) {
+            return;
+        }
         this.tagList.remove(tag.getName());
 
         if(tag instanceof TagTempHumi)
@@ -230,6 +254,22 @@ public class BleFactory
         else if (tag instanceof TagMagnetic)
         {
             TagMagnetic tagT = (TagMagnetic) tag;
+            tagT.updateData(rawData, data);
+            this.tagList.put(rawData.getDevice().getName(), tag);
+            this.macList.put(rawData.getDevice().getName(), rawData.getDevice().getAddress());
+            this.currentTag = tagT;
+        }
+        else if (tag instanceof TagBeacon)
+        {
+            TagBeacon tagT = (TagBeacon) tag;
+            tagT.updateData(rawData, data);
+            this.tagList.put(rawData.getDevice().getName(), tag);
+            this.macList.put(rawData.getDevice().getName(), rawData.getDevice().getAddress());
+            this.currentTag = tagT;
+        }
+        else if (tag instanceof TagEddystone)
+        {
+            TagEddystone tagT = (TagEddystone) tag;
             tagT.updateData(rawData, data);
             this.tagList.put(rawData.getDevice().getName(), tag);
             this.macList.put(rawData.getDevice().getName(), rawData.getDevice().getAddress());
