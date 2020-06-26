@@ -40,3 +40,6 @@ before_script:
 script:
   - ./gradlew clean build
   - ./gradlew test
+  
+after_success:
+  - ./gradlew BlueToolBox coveralls
