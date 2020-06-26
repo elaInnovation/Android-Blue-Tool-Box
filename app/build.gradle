@@ -54,6 +54,6 @@ coveralls {
 }
 
 tasks.coveralls {
-    dependsOn 'BlueToolBox'
+    dependsOn 'Android-Blue-Tool-Box'
     onlyIf { System.env.'CI' }
 }
