@@ -14,9 +14,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,7 +37,6 @@ import com.ela.deviceadvertisingmobile.view.sensors.MovementFragment;
 import com.ela.deviceadvertisingmobile.view.sensors.TemperatureFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -78,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("NewApi")
     @Override
     public void onBackPressed(){
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.getFragments().remove(fragmentManager.getFragments().size() -1 );
+        //FragmentManager fragmentManager = getFragmentManager();
+        //fragmentManager.getFragments().remove(fragmentManager.getFragments().size() -1 );
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
