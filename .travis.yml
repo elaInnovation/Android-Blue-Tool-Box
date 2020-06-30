@@ -42,4 +42,4 @@ script:
   - ./gradlew test
   
 after_success:
-  - ./gradlew BlueToolBox coveralls
+  - ./gradlew Android-Blue-Tool-Box coveralls
